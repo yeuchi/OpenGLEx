@@ -9,6 +9,12 @@ import android.view.SurfaceView
 import javax.microedition.khronos.egl.*
 import javax.microedition.khronos.opengles.GL10
 
+/*
+ * Ported source from Java -> Kotlin and reduced.
+ * Android Wireless Application Develop by Lauren Darcey and Shae Conder, 2nd Edition - Pearson Education
+ * ISBN-13: 978-0-321-74967-3
+ * ISBN-10: 0-321-74967-7
+ */
 class GLSurfaceView internal constructor(context: Context?) :
     SurfaceView(context), SurfaceHolder.Callback {
 

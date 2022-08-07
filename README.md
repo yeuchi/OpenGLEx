@@ -1,7 +1,7 @@
 # OpenGLEx
 Collection of OpenGL exercises.
 
-Exercise #1 - Triangles \
+## Exercise 1 - Triangles \
 Porting old code from Lauren Darcey's text<sup>[1]</sup> from Java to Kotlin. \
 Code renders a simple triangle with their TriangleSmallGLUT class. \
 No creative contribution, just establishing a functional base line of their demo. \

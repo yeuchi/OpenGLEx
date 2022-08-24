@@ -9,4 +9,10 @@ class OFFActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_offactivity)
     }
+
+    /*
+     * 1. load file
+     * 2. decode
+     * 3. render
+     */
 }

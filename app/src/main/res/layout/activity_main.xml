@@ -30,4 +30,11 @@
         android:layout_margin="10dp"
         android:text="Decode OFF"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_stl"
+        android:layout_margin="10dp"
+        android:text="Decode STL"/>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

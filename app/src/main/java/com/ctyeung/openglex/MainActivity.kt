@@ -3,17 +3,14 @@ package com.ctyeung.openglex
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.ctyeung.openglex.base.BaseActivity
 import com.ctyeung.openglex.basic.BasicActivity
-import com.ctyeung.openglex.off.OFFActivity
 
-/*
- * OpenGL exercise - Bring up to date from demos in text.
- * Android Wireless Application Development by Lauren Darcey
- */
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,9 +32,15 @@ class MainActivity : AppCompatActivity() {
                 navigate2Activity(OFFActivity::class.java)
             }
         }
+
+        findViewById<Button>(R.id.btn_stl)?.apply {
+            setOnClickListener {
+                navigate2Activity(STLActivity::class.java)
+            }
+        }
     }
 
-    fun navigate2Activity(classType:Class<*>) {
+    fun navigate2Activity(classType: Class<*>) {
         val intent = Intent(this, classType)
         startActivity(intent)
     }

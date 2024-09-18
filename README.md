@@ -11,6 +11,9 @@ No creative contribution, just establishing a functional base line of their demo
 # Android Studio
 <img width="400" src="https://github.com/user-attachments/assets/1d0130e4-b586-4007-b364-ede2b6bf64f6">
 
+# Test Device(s)
+1. Emulator Google Pixel 5 API 30
+
 # References
 
 1. Android Wireless Application Develop by Lauren Darcey and Shae Conder, 2nd Edition - Pearson Education \

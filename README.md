@@ -13,6 +13,7 @@ No creative contribution, just establishing a functional base line of their demo
 
 # Test Device(s)
 1. Emulator Google Pixel 5 API 30
+2. Samsung S9 API 29
 
 # References
 

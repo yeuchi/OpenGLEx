@@ -1,4 +1,4 @@
-package com.ctyeung.openglex.basic
+package com.ctyeung.openglex.basicGL
 
 import android.content.Context
 import android.opengl.GLDebugHelper

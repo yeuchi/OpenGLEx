@@ -3,13 +3,10 @@ package com.ctyeung.openglex
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
-import com.ctyeung.openglex.base.BaseActivity
-import com.ctyeung.openglex.basic.BasicActivity
+import com.ctyeung.openglex.baseGL.BaseGLActivity
+import com.ctyeung.openglex.basicGL.BasicGLActivity
 import com.ctyeung.openglex.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -22,13 +19,13 @@ class MainActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.btn_basic)?.apply {
             setOnClickListener {
-                navigate2Activity(BasicActivity::class.java)
+                navigate2Activity(BasicGLActivity::class.java)
             }
         }
 
         findViewById<Button>(R.id.btn_base)?.apply {
             setOnClickListener {
-                navigate2Activity(BaseActivity::class.java)
+                navigate2Activity(BaseGLActivity::class.java)
             }
         }
 

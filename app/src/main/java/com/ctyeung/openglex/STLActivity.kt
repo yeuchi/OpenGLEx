@@ -12,17 +12,12 @@ import androidx.databinding.DataBindingUtil
 import com.ctyeung.openglex.databinding.ActivityStlactivityBinding
 import java.io.IOException
 
-class STLActivity : AppCompatActivity() {
+class STLActivity : BaseActivity() {
     private lateinit var binding:ActivityStlactivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView (this, R.layout.activity_stlactivity)
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
+        initActionBar(binding.toolbar)
     }
 
     /*
@@ -38,26 +33,5 @@ class STLActivity : AppCompatActivity() {
         val filePath = "monkey_ascii.stl"
         // val filePath = "file:///assets_stl/torus_ascii.stl"
         val ascii = readAsciiFile(filePath)
-    }
-
-    private fun readAsciiFile(filePath: String): String {
-        return try {
-            applicationContext.assets.open(filePath).bufferedReader().use { it.readText() }
-        } catch (e: IOException) {
-            Log.e("FileError", "Error reading file", e)
-            "" // Return an empty string or handle the error as needed
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        when (itemId) {
-            android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-        return true
     }
 }

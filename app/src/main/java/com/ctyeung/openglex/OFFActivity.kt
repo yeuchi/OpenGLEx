@@ -9,29 +9,12 @@ import androidx.databinding.DataBindingUtil
 import com.ctyeung.openglex.databinding.ActivityOffactivityBinding
 import java.io.IOException
 
-class OFFActivity : AppCompatActivity() {
+class OFFActivity : BaseActivity() {
     private lateinit var binding: ActivityOffactivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView (this, R.layout.activity_offactivity)
-
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.apply {
-            setDisplayHomeAsUpEnabled(true)
-            setDisplayShowHomeEnabled(true)
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val itemId = item.itemId
-        when (itemId) {
-            android.R.id.home -> {
-                startActivity(Intent(this, MainActivity::class.java))
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-        return true
+        initActionBar(binding.toolbar)
     }
 
     /*

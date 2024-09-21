@@ -1,4 +1,4 @@
-package com.ctyeung.openglex.base
+package com.ctyeung.openglex.baseGL
 
 import android.content.Context
 import android.opengl.GLDebugHelper
@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import com.ctyeung.openglex.TriangleSmallGLUT
-import com.ctyeung.openglex.basic.BasicGLSurfaceView
+import com.ctyeung.openglex.basicGL.BasicGLSurfaceView
 import javax.microedition.khronos.egl.*
 import javax.microedition.khronos.opengles.GL10
 

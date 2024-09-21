@@ -1,17 +1,28 @@
 package com.ctyeung.openglex
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
+import com.ctyeung.openglex.databinding.ActivityStlactivityBinding
 import java.io.IOException
 
 class STLActivity : AppCompatActivity() {
+    private lateinit var binding:ActivityStlactivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_stlactivity)
+        binding = DataBindingUtil.setContentView (this, R.layout.activity_stlactivity)
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowHomeEnabled(true)
+        }
     }
 
     /*
@@ -36,5 +47,17 @@ class STLActivity : AppCompatActivity() {
             Log.e("FileError", "Error reading file", e)
             "" // Return an empty string or handle the error as needed
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val itemId = item.itemId
+        when (itemId) {
+            android.R.id.home -> {
+                startActivity(Intent(this, MainActivity::class.java))
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
+        return true
     }
 }

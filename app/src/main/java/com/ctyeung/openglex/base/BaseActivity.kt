@@ -18,9 +18,9 @@ class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView (this, R.layout.activity_base)
-
         mAndroidSurface = GLSurfaceView(this)
-        setContentView(mAndroidSurface)
+
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)

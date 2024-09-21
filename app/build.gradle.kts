@@ -43,6 +43,13 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    implementation("com.google.android.material:material:1.3.0-alpha02")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+    implementation(libs.androidx.navigation.ui.ktx)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

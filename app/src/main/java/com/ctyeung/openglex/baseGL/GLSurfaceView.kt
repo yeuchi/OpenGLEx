@@ -3,6 +3,7 @@ package com.ctyeung.openglex.baseGL
 import android.content.Context
 import android.opengl.GLDebugHelper
 import android.opengl.GLU
+import android.util.AttributeSet
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -17,7 +18,7 @@ import javax.microedition.khronos.opengles.GL10
  * ISBN-13: 978-0-321-74967-3
  * ISBN-10: 0-321-74967-7
  */
-class GLSurfaceView internal constructor(context: Context?) :
+class GLSurfaceView internal constructor(context: Context, attrs: AttributeSet) :
     SurfaceView(context), SurfaceHolder.Callback {
 
     private var mAndroidHolder: SurfaceHolder = holder

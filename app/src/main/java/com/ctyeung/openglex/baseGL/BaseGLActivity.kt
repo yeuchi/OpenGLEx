@@ -11,16 +11,16 @@ import com.ctyeung.openglex.MainActivity
 import com.ctyeung.openglex.R
 import com.ctyeung.openglex.databinding.ActivityBaseBinding
 
-class BaseGLActivity : AppCompatActivity() {
-    private var mAndroidSurface: SurfaceView? = null
-//    private lateinit var binding: ActivityBaseBinding
+class BaseGLActivity : BaseActivity() {
+//    private var mAndroidSurface: SurfaceView? = null
+    private lateinit var binding: ActivityBaseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_base)
-        mAndroidSurface = GLSurfaceView(this)
-        setContentView(mAndroidSurface)
-//        binding = DataBindingUtil.setContentView (this, R.layout.activity_base)
-//        initActionBar(binding.toolbar)
+        binding = DataBindingUtil.setContentView (this, R.layout.activity_base)
+//        setContentView(R.layout.activity_base)
+//        mAndroidSurface = GLSurfaceView(this)
+//        setContentView(mAndroidSurface)
+        initActionBar(binding.toolbar)
     }
 }

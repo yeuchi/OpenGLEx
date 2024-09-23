@@ -3,6 +3,7 @@ package com.ctyeung.openglex.basicGL
 import android.content.Context
 import android.opengl.GLDebugHelper
 import android.opengl.GLU
+import android.util.AttributeSet
 import android.util.Log
 import android.view.SurfaceHolder
 import android.view.SurfaceView
@@ -16,7 +17,7 @@ import javax.microedition.khronos.opengles.GL10
  * ISBN-13: 978-0-321-74967-3
  * ISBN-10: 0-321-74967-7
  */
-class BasicGLSurfaceView internal constructor(context: Context?) :
+class BasicGLSurfaceView internal constructor(context: Context, attrs: AttributeSet) :
     SurfaceView(context), SurfaceHolder.Callback {
 
     private var mAndroidHolder: SurfaceHolder = holder
@@ -28,8 +29,9 @@ class BasicGLSurfaceView internal constructor(context: Context?) :
     }
 
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-        if (mGLThread != null) {
-            mGLThread?.requestStop()
+        mGLThread?.let {
+            it.requestStop()
+            mGLThread = null
         }
     }
 

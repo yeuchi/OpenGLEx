@@ -10,9 +10,16 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import com.ctyeung.openglex.databinding.ActivityStlactivityBinding
+import com.ctyeung.openglex.stl.Ascii
 import java.io.IOException
 
 class STLActivity : BaseActivity() {
+
+    private var dataType:String? = null
+    private var listVertex = ArrayList<Float>()
+    private var listNormal = ArrayList<Float>()
+
+    private var stl: Ascii? = null
     private lateinit var binding:ActivityStlactivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +38,9 @@ class STLActivity : BaseActivity() {
 
         // load file
         val filePath = "monkey_ascii.stl"
-        // val filePath = "file:///assets_stl/torus_ascii.stl"
-        val ascii = readAsciiFile(filePath)
+        val dataAscii = readAsciiFile(filePath)
+
+        stl = Ascii.decode(dataAscii)
     }
+
 }

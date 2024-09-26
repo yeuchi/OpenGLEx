@@ -92,16 +92,21 @@ class BasicGLSurfaceView internal constructor(context: Context, attrs: Attribute
         }
 
         private fun cleanupGL() {
-            mEGL?.apply {
-                eglMakeCurrent(
-                    mGLDisplay, EGL10.EGL_NO_SURFACE,
-                    EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT
-                )
-                eglDestroySurface(mGLDisplay, mGLSurface)
-                eglDestroyContext(mGLDisplay, mGLContext)
-                eglTerminate(mGLDisplay)
+            try {
+                mEGL?.apply {
+                    eglMakeCurrent(
+                        mGLDisplay, EGL10.EGL_NO_SURFACE,
+                        EGL10.EGL_NO_SURFACE, EGL10.EGL_NO_CONTEXT
+                    )
+                    eglDestroySurface(mGLDisplay, mGLSurface)
+                    eglDestroyContext(mGLDisplay, mGLContext)
+                    eglTerminate(mGLDisplay)
+                }
+                Log.i(DEBUG_TAG, "GL Cleaned up")
             }
-            Log.i(DEBUG_TAG, "GL Cleaned up")
+            catch (e: Exception) {
+                Log.e(DEBUG_TAG, "cleanupGL Failure", e)
+            }
         }
 
         private fun initGL() {

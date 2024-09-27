@@ -13,10 +13,10 @@
         android:theme="@style/Theme.OpenGLEx"
         tools:targetApi="31">
         <activity
-            android:name=".STLActivity"
+            android:name=".stl.STLActivity"
             android:exported="false" />
         <activity
-            android:name=".OFFActivity"
+            android:name=".off.OFFActivity"
             android:exported="false" />
         <activity
             android:name=".baseGL.BaseGLActivity"

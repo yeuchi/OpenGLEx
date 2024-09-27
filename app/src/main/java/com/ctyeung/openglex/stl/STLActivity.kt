@@ -1,17 +1,10 @@
-package com.ctyeung.openglex
+package com.ctyeung.openglex.stl
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import com.ctyeung.openglex.BaseActivity
+import com.ctyeung.openglex.R
 import com.ctyeung.openglex.databinding.ActivityStlactivityBinding
-import com.ctyeung.openglex.stl.Ascii
-import java.io.IOException
 
 class STLActivity : BaseActivity() {
 

@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import com.ctyeung.openglex.baseGL.BaseGLActivity
 import com.ctyeung.openglex.basicGL.BasicGLActivity
 import com.ctyeung.openglex.databinding.ActivityMainBinding
+import com.ctyeung.openglex.off.OFFActivity
+import com.ctyeung.openglex.stl.STLActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

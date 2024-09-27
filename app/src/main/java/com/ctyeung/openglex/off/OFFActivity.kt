@@ -1,13 +1,10 @@
-package com.ctyeung.openglex
+package com.ctyeung.openglex.off
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.MenuItem
 import androidx.databinding.DataBindingUtil
+import com.ctyeung.openglex.BaseActivity
+import com.ctyeung.openglex.R
 import com.ctyeung.openglex.databinding.ActivityOffactivityBinding
-import java.io.IOException
 
 class OFFActivity : BaseActivity() {
     private lateinit var binding: ActivityOffactivityBinding

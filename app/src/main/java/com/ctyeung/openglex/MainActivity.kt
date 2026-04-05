@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.ctyeung.openglex.baseGL.BaseGLActivity
 import com.ctyeung.openglex.basicGL.BasicGLActivity
 import com.ctyeung.openglex.databinding.ActivityMainBinding
+import com.ctyeung.openglex.demo.OpenGLES20Activity
 import com.ctyeung.openglex.off.OFFActivity
 import com.ctyeung.openglex.stl.STLActivity
 
@@ -28,6 +29,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_base)?.apply {
             setOnClickListener {
                 navigate2Activity(BaseGLActivity::class.java)
+            }
+        }
+
+        findViewById<Button>(R.id.btn_demo)?.apply {
+            setOnClickListener {
+                navigate2Activity(OpenGLES20Activity::class.java)
             }
         }
 

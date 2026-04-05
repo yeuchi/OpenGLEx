@@ -48,6 +48,13 @@
         android:layout_margin="10dp"
         android:text="Basic"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_demo"
+            android:layout_margin="10dp"
+            android:text="Demo"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

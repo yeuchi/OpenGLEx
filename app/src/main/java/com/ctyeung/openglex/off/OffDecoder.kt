@@ -39,10 +39,10 @@ class OffDecoder {
                 var scaledVertices = FloatArray(it.size)
                 var i = 0
                 while (i < it.size) {
-                    val scaled = meshBound.scale(it[i], it[i+1], it[i+2])
+                    val scaled = meshBound.scale(it[i], it[i + 1], it[i + 2])
                     scaledVertices[i] = scaled[0]
-                    scaledVertices[i+1] = scaled[1]
-                    scaledVertices[i+2] = scaled[2]
+                    scaledVertices[i + 1] = scaled[1]
+                    scaledVertices[i + 2] = scaled[2]
                     i += 3
                 }
                 return scaledVertices
@@ -68,16 +68,15 @@ class OffDecoder {
             return null
         }
 
-    fun loadFrom(uri: Uri, contentResolver: ContentResolver): Boolean {
-        val `in`: InputStream? = contentResolver.openInputStream(uri)
-        val r = BufferedReader(InputStreamReader(`in`))
-
+    fun loadFrom(ascii: String): Boolean {
         try {
             preloadInit()
-            parseOFFHeader(r)
-            parseMeshInfo(r)
-            parseVertices(r)
-            parseFaces(r)
+            val lines = ascii.split('\n')
+
+            parseOFFHeader(lines)
+            parseMeshInfo(lines)
+            parseVertices(lines)
+            parseFaces(lines)
             return true
         } catch (e: Exception) {
             Log.e("OffDecoder", e.toString())
@@ -112,9 +111,8 @@ class OffDecoder {
     /*
      * 1st line is OFF (optional)
      */
-    private fun parseOFFHeader(r: BufferedReader): Boolean {
-        var line: String?
-        while (r.readLine().also { line = it } != null) {
+    private fun parseOFFHeader(lines: List<String>): Boolean {
+        for (line in lines) {
             val filtered = removeComment(line)
             return filtered?.contains("OFF") ?: throw Exception("missing OFF header")
         }
@@ -124,9 +122,8 @@ class OffDecoder {
     /*
      * 2nd line: the number of vertices, number of faces, and number of edges
      */
-    private fun parseMeshInfo(r: BufferedReader): Boolean {
-        var line: String?
-        while (r.readLine().also { line = it } != null) {
+    private fun parseMeshInfo(lines: List<String>): Boolean {
+        for (line in lines) {
             removeComment(line)?.let {
                 val metrics = it.split(' ')
                 if (metrics.size == 3) {
@@ -146,38 +143,38 @@ class OffDecoder {
      * x y z r g b a
      * for vertex 0, 1, ..., vertex_count-1
      */
-    private fun parseVertices(r: BufferedReader): Boolean {
+    private fun parseVertices(lines: List<String>): Boolean {
         _vertices = FloatArray(_numVertices * 3)
         _vertices?.apply {
             var index = 0
-            var line: String?
-            while (r.readLine().also { line = it } != null &&
-                index < _numVertices) {
-                val filtered = removeComment(line)
-                filtered?.let {
-                    /*
-                     * TODO handle optional RGB color
-                     */
-                    val xyz = it.split(' ')
-                    var count = 0
-                    for (i in xyz.indices) {
-                        val vertex = xyz.get(i)
-                        if (vertex.isNotEmpty() && count < 3) {
-                            this[index * 3 + count] = vertex.toFloat()
-                            count++
+            for (line in lines) {
+                if (index < _numVertices) {
+                    val filtered = removeComment(line)
+                    filtered?.let {
+                        /*
+                         * TODO handle optional RGB color
+                         */
+                        val xyz = it.split(' ')
+                        var count = 0
+                        for (i in xyz.indices) {
+                            val vertex = xyz.get(i)
+                            if (vertex.isNotEmpty() && count < 3) {
+                                this[index * 3 + count] = vertex.toFloat()
+                                count++
+                            }
                         }
+                        if (count == 3) {
+                            // find mesh bound for post scaling
+                            meshBound.collect(
+                                this[index * 3],
+                                this[index * 3 + 1],
+                                this[index * 3 + 2]
+                            )
+                        } else {
+                            throw Exception("invalid vertex count")
+                        }
+                        index++
                     }
-                    if (count == 3) {
-                        // find mesh bound for post scaling
-                        meshBound.collect(
-                            this[index * 3],
-                            this[index * 3 + 1],
-                            this[index * 3 + 2]
-                        )
-                    } else {
-                        throw Exception("invalid vertex count")
-                    }
-                    index++
                 }
             }
             return true
@@ -190,69 +187,69 @@ class OffDecoder {
      * n v1 v2 ... vn r g b a,
      * the number of vertices, and the vertex indices for each face.
      */
-    private fun parseFaces(r: BufferedReader): Boolean {
+    private fun parseFaces(lines: List<String>): Boolean {
         _faces.clear()
         var index = 0
-        var line: String?
-        while (r.readLine().also { line = it } != null &&
-            index < _numFaces) {
-            val filtered = removeComment(line)
-            filtered?.let {
+        for (line in lines) {
+            if (index < _numFaces) {
+                val filtered = removeComment(line)
+                filtered?.let {
 
-                val abc = it.split(' ')
-                var entryCount = 0
-                var faceVertexCount = 0
-                var list: IntArray? = null
+                    val abc = it.split(' ')
+                    var entryCount = 0
+                    var faceVertexCount = 0
+                    var list: IntArray? = null
 
-                for (i in abc.indices) {
-                    val num = abc.get(i)
-                    if (num.isNotEmpty()) {
-                        when {
-                            entryCount == 0 -> {
-                                faceVertexCount = num.toIntOrNull()
-                                    ?: throw Exception("invalid face vertex count")
-                                entryCount++
-                                list = IntArray(faceVertexCount)
+                    for (i in abc.indices) {
+                        val num = abc.get(i)
+                        if (num.isNotEmpty()) {
+                            when {
+                                entryCount == 0 -> {
+                                    faceVertexCount = num.toIntOrNull()
+                                        ?: throw Exception("invalid face vertex count")
+                                    entryCount++
+                                    list = IntArray(faceVertexCount)
 
-                                /*
-                                 * TODO More than 3 vertices not supported
-                                 */
+                                    /*
+                                     * TODO More than 3 vertices not supported
+                                     */
 //                                if(faceVertexCount>3) {
 //                                    throw Exception("unsupported polygons - more than 3 vertices")
 //                                }
-                            }
-
-                            entryCount in 1 until faceVertexCount + 1 -> {
-                                list?.apply {
-                                    this[entryCount - 1] = num.toIntOrNull()
-                                        ?: throw Exception("invalid face vertex count")
-                                    entryCount++
                                 }
-                            }
 
-                            else -> {
-                                /*
-                                 * TODO handle optional RGB color
-                                 *  TODO handle faces with more than 3 edges
-                                 */
+                                entryCount in 1 until faceVertexCount + 1 -> {
+                                    list?.apply {
+                                        this[entryCount - 1] = num.toIntOrNull()
+                                            ?: throw Exception("invalid face vertex count")
+                                        entryCount++
+                                    }
+                                }
+
+                                else -> {
+                                    /*
+                                     * TODO handle optional RGB color
+                                     *  TODO handle faces with more than 3 edges
+                                     */
+                                }
                             }
                         }
                     }
-                }
-                if (entryCount != faceVertexCount + 1) {
-                    throw Exception("invalid face entries")
-                }
-                _faces.add(
-                    OffFace(
-                        entryCount,
-                        list ?: throw Exception("missing face entries")
+                    if (entryCount != faceVertexCount + 1) {
+                        throw Exception("invalid face entries")
+                    }
+                    _faces.add(
+                        OffFace(
+                            entryCount,
+                            list ?: throw Exception("missing face entries")
+                        )
                     )
-                )
-                index++
+                    index++
+                }
             }
         }
         return true
     }
 }
 
-data class OffFace (val num:Int, val list:IntArray)
+data class OffFace(val num: Int, val list: IntArray)

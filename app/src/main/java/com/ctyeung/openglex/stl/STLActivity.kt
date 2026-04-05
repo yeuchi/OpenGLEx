@@ -33,7 +33,8 @@ class STLActivity : BaseActivity() {
         val filePath = "monkey_ascii.stl"
         val dataAscii = readAsciiFile(filePath)
 
-        stl = Ascii.decode(dataAscii)
+        Ascii.decode(dataAscii)?.let {
+            Renderer().render(it)
+        }
     }
-
 }

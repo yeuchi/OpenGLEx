@@ -10,6 +10,11 @@ import com.ctyeung.openglex.R
 import com.ctyeung.openglex.databinding.ActivityOffactivityBinding
 import java.lang.Exception
 
+/*
+ * see ndk samples
+ * https://github.com/android/ndk-samples/tree/main
+ */
+
 class OFFActivity : BaseActivity() {
     private lateinit var binding: ActivityOffactivityBinding
     override fun onCreate(savedInstanceState: Bundle?) {

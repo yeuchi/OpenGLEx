@@ -1,3 +1,5 @@
+
+![Uploading Screenshot 2026-04-27 at 6.48.16 PM.png…]()
 # OpenGLEx
 Collection of OpenGL exercises.
 
@@ -11,7 +13,7 @@ No creative contribution, just establishing a functional base line of their demo
 ## Exercise 2 - Loader (OFF, STL) Work in progress
 
 # Android Studio
-<img width="400" src="https://github.com/user-attachments/assets/1d0130e4-b586-4007-b364-ede2b6bf64f6">
+<img width="520" height="269" alt="Screenshot 2026-04-27 at 6 48 16 PM" src="https://github.com/user-attachments/assets/df4e2500-4b58-4270-ab20-810599024387" />
 
 # Test Device(s)
 1. Emulator Google Pixel 5 API 30

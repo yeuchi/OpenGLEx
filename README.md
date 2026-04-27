@@ -1,5 +1,4 @@
 
-![Uploading Screenshot 2026-04-27 at 6.48.16 PM.png…]()
 # OpenGLEx
 Collection of OpenGL exercises.
 

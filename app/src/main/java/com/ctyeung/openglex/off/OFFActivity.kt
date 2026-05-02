@@ -10,6 +10,7 @@ import com.ctyeung.openglex.R
 import com.ctyeung.openglex.databinding.ActivityOffactivityBinding
 import com.ctyeung.openglex.geometry.PointF3D
 import java.lang.Exception
+import kotlin.concurrent.timer
 
 /*
  * see ndk samples
@@ -18,6 +19,10 @@ import java.lang.Exception
 
 class OFFActivity : BaseActivity() {
     private lateinit var binding: ActivityOffactivityBinding
+    private var rotateX: Float = 0F
+    private var rotateY: Float = 0F
+    private var rotateZ: Float = 0F
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView (this, R.layout.activity_offactivity)
@@ -60,12 +65,23 @@ class OFFActivity : BaseActivity() {
         val filePath = "space_shuttle.off"
         val dataAscii = readAsciiFile(filePath)
 
-        OffDecoder().apply {
-            if (loadFrom(dataAscii)) {
-                if (numVertices > 0 &&
-                    numFaces > 0
+        OffDecoder().let { off->
+            if (off.loadFrom(dataAscii)) {
+                if (off.numVertices > 0 &&
+                    off.numFaces > 0
                 ) {
-                    render(this)
+                    render(off)
+
+                    val myTimer = timer(
+                        name = "periodic-task",
+                        initialDelay = 0,
+                        period = 100 // 1 second
+                    ) {
+                        rotateX += 2;
+                        if(rotateX>360)
+                            rotateX -= 360;
+                        rotate()
+                    }
                 }
             }
         }
@@ -78,17 +94,23 @@ class OFFActivity : BaseActivity() {
                 /*
                  * TODO 1st step - render vertices only
                  */
+                val view = findViewById<MyKnotsView>(R.id.myKnotsView)
+                view.setData(listFaces, listVertices, meshBound)
 
                 /*
                  * TODO 2nd step - render triangles + shading
                  */
 
-                val view = findViewById<MyKnotsView>(R.id.myKnotsView)
-                view.setVertices(off.listVertices)
 
             } catch (ex: Exception) {
                 Log.e("OffDecoder", ex.toString())
             }
         }
+    }
+
+    private fun rotate() {
+        val view = findViewById<MyKnotsView>(R.id.myKnotsView)
+        view.setRotation(rotateX, rotateY, rotateZ)
+
     }
 }

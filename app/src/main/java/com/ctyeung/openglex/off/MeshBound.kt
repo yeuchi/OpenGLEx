@@ -1,19 +1,26 @@
 package com.ctyeung.openglex.off
 
+import com.ctyeung.openglex.geometry.PointF3D
+
 /*
  * Same thing as a RectF
  * just being more explicit
  */
-data class MeshBound(
-    var minX: Float = 0f,
-    var maxX: Float = 0f,
-    var minY: Float = 0f,
-    var maxY: Float = 0f,
-    var minZ: Float = 0f,
+class MeshBound {
+    var minX: Float = 0f
+    var maxX: Float = 0f
+    var minY: Float = 0f
+    var maxY: Float = 0f
+    var minZ: Float = 0f
     var maxZ: Float = 0f
-) {
 
-    fun collect(x: Float, y: Float, z: Float) {
+    fun find(vertices: ArrayList<PointF3D>) {
+        vertices.forEach { v->
+            collect(v.x, v.y, v.z)
+        }
+    }
+
+    private fun collect(x: Float, y: Float, z: Float) {
         if (x < minX) {
             minX = x
         } else if (x > maxX) {

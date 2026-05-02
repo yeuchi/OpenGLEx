@@ -32,19 +32,12 @@ class OffDecoder {
             return _numEdges
         }
 
-    private var meshBound = MeshBound()
-    public var listVertices = arrayListOf<PointF3D>()
+    // find the rect that contains our mesh
+    var meshBound = MeshBound()
+    var listVertices = arrayListOf<PointF3D>()
 
 
-    private var listFaces = ArrayList<OffFace>()
-    val faces: IntArray?
-        get() {
-            /*
-             * TODO Tesselation needed -> 3 edge face triangle
-             *  or some other format of array -- there are N sides to a face.
-             */
-            return IntArray(3)
-        }
+    var listFaces = ArrayList<OffFace>()
 
     val facesNormal: FloatArray?
         get() {
@@ -147,6 +140,8 @@ class OffDecoder {
                     }
                 }
             }
+
+            meshBound.find(listVertices)
             return true
         }
     }

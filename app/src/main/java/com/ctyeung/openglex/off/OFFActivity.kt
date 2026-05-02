@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import com.ctyeung.openglex.BaseActivity
 import com.ctyeung.openglex.R
 import com.ctyeung.openglex.databinding.ActivityOffactivityBinding
+import com.ctyeung.openglex.geometry.PointF3D
 import java.lang.Exception
 
 /*
@@ -73,6 +74,17 @@ class OFFActivity : BaseActivity() {
     private fun render(off: OffDecoder) {
         off.apply {
             try {
+
+                /*
+                 * TODO 1st step - render vertices only
+                 */
+
+                /*
+                 * TODO 2nd step - render triangles + shading
+                 */
+
+                val view = findViewById<MyKnotsView>(R.id.myKnotsView)
+                view.setVertices(off.listVertices)
 
             } catch (ex: Exception) {
                 Log.e("OffDecoder", ex.toString())

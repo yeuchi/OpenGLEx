@@ -8,6 +8,23 @@
         android:layout_height="match_parent"
         tools:context=".off.OFFActivity">
 
+        <FrameLayout
+            android:id="@+id/gl_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <com.ctyeung.openglex.off.MyKnotsView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/myKnotsView"
+                />
+
+        </FrameLayout>
+
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
@@ -23,15 +40,6 @@
                 app:title="OFF Decoder" />
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <FrameLayout
-            android:id="@+id/gl_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

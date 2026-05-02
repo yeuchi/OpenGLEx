@@ -6,6 +6,7 @@ package com.ctyeung.openglex.off
 import android.content.ContentResolver
 import android.net.Uri
 import android.util.Log
+import com.ctyeung.openglex.geometry.PointF3D
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
@@ -32,7 +33,7 @@ class OffDecoder {
         }
 
     private var meshBound = MeshBound()
-    private var listVertices = arrayListOf<ArrayList<Float>>()
+    public var listVertices = arrayListOf<PointF3D>()
 
 
     private var listFaces = ArrayList<OffFace>()
@@ -130,16 +131,20 @@ class OffDecoder {
         listVertices.apply {
             clear()
 
-            val vertices = arrayListOf<Float>()
+            if((numVertices+pos) > lines.size) {
+                // invalid - not enough lines
+                return false
+            }
+
             for(i in 0 until numVertices){
                 lines[pos].replace("\r", "").let {
                     val list = it.split(' ')
                     pos ++
-                    for(j in 0 until list.size) {
-                        val n = list[j].toFloat()
-                        vertices.add(n)
+
+                    if(list.size >= 3) {
+                        val vertex = PointF3D(list[0].toFloat(), list[1].toFloat(), list[2].toFloat())
+                        listVertices.add(vertex)
                     }
-                    listVertices.add(vertices)
                 }
             }
             return true

@@ -73,6 +73,12 @@ class MyKnotsView(
             paint.strokeCap = Paint.Cap.ROUND
             paint.color = lineColor
 
+            /*
+             * TODO find center by meshBound
+             */
+
+            val center = _meshBound.getCenter()
+
             val halfWidth = canvas.width/2F
             val halfHeight = canvas.height/2F
 
@@ -83,7 +89,7 @@ class MyKnotsView(
                     return false;
                 }
                 // retrieve vertex
-                val vtx1 = _vertices[vIndex]
+                val vtx1 = _vertices[vIndex].let { PointF3D(it.x-center.x, it.y-center.y, it.z-center.z) }
 
                 val y = cos(radX) * vtx1.y - sin(radX) * vtx1.z
                 val z = sin(radX) * vtx1.y + cos(radX) * vtx1.z

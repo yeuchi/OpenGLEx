@@ -137,11 +137,10 @@ class OffDecoder {
                     if(list.size >= 3) {
                         val vertex = PointF3D(list[0].toFloat(), list[1].toFloat(), list[2].toFloat())
                         listVertices.add(vertex)
+                        meshBound.collect(vertex.x, vertex.y, vertex.z)
                     }
                 }
             }
-
-            meshBound.find(listVertices)
             return true
         }
     }

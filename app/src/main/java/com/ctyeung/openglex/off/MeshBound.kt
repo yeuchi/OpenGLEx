@@ -14,13 +14,11 @@ class MeshBound {
     var minZ: Float = 0f
     var maxZ: Float = 0f
 
-    fun find(vertices: ArrayList<PointF3D>) {
-        vertices.forEach { v->
-            collect(v.x, v.y, v.z)
-        }
+    fun getCenter(): PointF3D {
+        return PointF3D(minX + (maxX-minX)/2F, minY + (maxY-minY)/2F, minZ + (maxZ-minZ)/2F)
     }
 
-    private fun collect(x: Float, y: Float, z: Float) {
+    fun collect(x: Float, y: Float, z: Float) {
         if (x < minX) {
             minX = x
         } else if (x > maxX) {

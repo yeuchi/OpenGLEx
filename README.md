@@ -13,7 +13,7 @@ No creative contribution, just establishing a functional base line of their demo
 
 Decoder done.  
 Rendering faces (triangles) wireframes ok.
-<img width="936" height="504" alt="Screenshot 2026-05-03 at 3 15 17 PM" src="https://github.com/user-attachments/assets/635b655d-7cf0-4652-82ad-d582df1b7391" />
+<img width="450" alt="Screenshot 2026-05-03 at 3 15 17 PM" src="https://github.com/user-attachments/assets/635b655d-7cf0-4652-82ad-d582df1b7391" />
 
 Next, implement OpenGL shader, viewport, camera, etc
 

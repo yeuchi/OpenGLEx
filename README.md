@@ -16,9 +16,10 @@ Rendering faces (triangles) wireframes ok.
 
 <img width="450" alt="Screenshot 2026-05-03 at 3 15 17 PM" src="https://github.com/user-attachments/assets/635b655d-7cf0-4652-82ad-d582df1b7391" />
 
-Next, implement OpenGL shader, viewport, camera, etc
-
 ## Exercise 3 - Loader (STL) Work in progress
+
+## Exercise 4 - OpenGL Rendering
+Implement GPU shader, viewport, camera, etc
 
 # Android Studio
 <img width="520" height="269" alt="Screenshot 2026-04-27 at 6 48 16 PM" src="https://github.com/user-attachments/assets/df4e2500-4b58-4270-ab20-810599024387" />

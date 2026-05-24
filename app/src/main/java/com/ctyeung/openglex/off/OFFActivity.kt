@@ -17,6 +17,7 @@ import kotlin.concurrent.timer
  * https://github.com/android/ndk-samples/tree/main
  */
 
+
 class OFFActivity : BaseActivity() {
     private lateinit var binding: ActivityOffactivityBinding
     private var rotateX: Float = 0F

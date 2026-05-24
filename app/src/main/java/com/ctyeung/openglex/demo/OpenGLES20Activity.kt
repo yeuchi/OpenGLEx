@@ -9,9 +9,9 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.ctyeung.openglex.R
 
-/**
- * Google Developer example
- * https://developer.android.com/develop/ui/views/graphics/opengl/draw
+/*
+ * Google developer Open GL lessons
+ * https://developer.android.com/develop/ui/views/graphics/opengl
  */
 class OpenGLES20Activity : Activity() {
 
@@ -25,17 +25,4 @@ class OpenGLES20Activity : Activity() {
         gLView = MyGLSurfaceView(this)
         setContentView(gLView)
     }
-
-
-//    : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        enableEdgeToEdge()
-//        setContentView(R.layout.activity_open_gles20)
-//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//            insets
-//        }
-//    }
 }

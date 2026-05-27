@@ -14,7 +14,7 @@ No creative contribution, just establishing a functional base line of their demo
 (a) animating triangle (background thread) (b) base triangle \
 <img width="250" src="https://user-images.githubusercontent.com/1282659/183309371-5df12301-39d4-4b17-a396-75f476537d72.jpg"> <img width="250" src="https://user-images.githubusercontent.com/1282659/183309374-d6428fae-b1c3-4542-a661-57d0e4316234.jpg">
 
-## Exercise 2 - Loader (OFF) Work in progress
+## Exercise 2 - Object File Loader(OFF) 
 
 Decoder done.  
 Rendering faces (triangles) wireframes ok.

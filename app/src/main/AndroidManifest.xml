@@ -17,6 +17,9 @@
         android:theme="@style/Theme.OpenGLEx"
         tools:targetApi="31">
         <activity
+            android:name=".offGL.OFFOpenGLActivity"
+            android:exported="false" />
+        <activity
             android:name=".demo.OpenGLES20Activity"
             android:exported="false" />
         <activity

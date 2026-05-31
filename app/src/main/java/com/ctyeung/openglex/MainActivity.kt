@@ -10,6 +10,7 @@ import com.ctyeung.openglex.basicGL.BasicGLActivity
 import com.ctyeung.openglex.databinding.ActivityMainBinding
 import com.ctyeung.openglex.demo.OpenGLES20Activity
 import com.ctyeung.openglex.off.OFFActivity
+import com.ctyeung.openglex.offGL.OFFOpenGLActivity
 import com.ctyeung.openglex.stl.STLActivity
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btn_off)?.apply {
             setOnClickListener {
                 navigate2Activity(OFFActivity::class.java)
+            }
+        }
+
+        findViewById<Button>(R.id.btn_offGL)?.apply {
+            setOnClickListener {
+                navigate2Activity(OFFOpenGLActivity::class.java)
             }
         }
 

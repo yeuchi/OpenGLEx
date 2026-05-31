@@ -63,6 +63,13 @@
         android:text="Decode OFF"/>
 
     <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_offGL"
+            android:layout_margin="10dp"
+            android:text="OFF OpenGL"/>
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_stl"

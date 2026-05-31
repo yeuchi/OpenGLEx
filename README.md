@@ -2,6 +2,11 @@
 # OpenGLEx
 Collection of OpenGL exercises.
 
+## Exercise 0 - Google Doc OpenGL Demo - Triangle
+Just following direction to experience demo.  Pretty cool. \
+https://developer.android.com/develop/ui/views/graphics/opengl/draw \
+<img width="250" alt="Screenshot 2026-05-24 at 1 40 39 PM" src="https://github.com/user-attachments/assets/780b4308-9bf2-4c55-b9c5-87e27b3b1f24" />
+
 ## Exercise 1 - Triangles 
 Porting Darcey & Conder's text<sup>[1]</sup> old demo from Java to Kotlin. \
 Code renders a simple triangle with their TriangleSmallGLUT class. \
@@ -9,7 +14,7 @@ No creative contribution, just establishing a functional base line of their demo
 (a) animating triangle (background thread) (b) base triangle \
 <img width="250" src="https://user-images.githubusercontent.com/1282659/183309371-5df12301-39d4-4b17-a396-75f476537d72.jpg"> <img width="250" src="https://user-images.githubusercontent.com/1282659/183309374-d6428fae-b1c3-4542-a661-57d0e4316234.jpg">
 
-## Exercise 2 - Loader (OFF) Work in progress
+## Exercise 2 - Object File Loader(OFF) 
 
 Decoder done.  
 Rendering faces (triangles) wireframes ok.

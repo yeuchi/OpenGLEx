@@ -10,6 +10,9 @@ import java.nio.ShortBuffer
 /**
  * Google Developer example
  * https://developer.android.com/develop/ui/views/graphics/opengl/draw
+ *
+ * Correct example to render square
+ * https://github.com/Mindinventory/OpenGLES-Shape-Rendering-Sample/blob/main/app/src/main/java/com/mindinventory/shape/ShapeActivity.kt
  */
 
 class Square2 {
@@ -27,8 +30,6 @@ class Square2 {
                 "  gl_FragColor = vColor;" +
                 "}"
 
-    // number of coordinates per vertex in this array
-    val COORDS_PER_VERTEX = 3
     var squareCoords = floatArrayOf(
         -0.5f,  0.5f, 0.0f,      // top left
         -0.5f, -0.5f, 0.0f,      // bottom left
@@ -95,7 +96,6 @@ class Square2 {
         }
     }
 
-    private val vertexCount: Int = squareCoords.size / com.ctyeung.openglex.demo.COORDS_PER_VERTEX
     private val vertexStride: Int = com.ctyeung.openglex.demo.COORDS_PER_VERTEX * 4 // 4 bytes per vertex
 
     private var positionHandle: Int = 0

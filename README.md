@@ -2,10 +2,11 @@
 # OpenGLEx
 Collection of OpenGL exercises.
 
-## Exercise 0 - Google Doc OpenGL Demo - Triangle
-Just following direction to experience demo.  Pretty cool. \
+## Exercise 0 - Google Doc OpenGL Demo - Triangle, Square
+Just following direction to experience demo.  Slight addition for square. \
 https://developer.android.com/develop/ui/views/graphics/opengl/draw \
-<img width="250" alt="Screenshot 2026-05-24 at 1 40 39 PM" src="https://github.com/user-attachments/assets/780b4308-9bf2-4c55-b9c5-87e27b3b1f24" />
+<img width="250" alt="triangle" src="https://github.com/user-attachments/assets/0029953f-aee9-4277-ab8e-7e0c3aaa1820" />
+<img width="250" alt="square" src="https://github.com/user-attachments/assets/fa83f457-64ce-454e-b369-f1f5588497e9" />
 
 ## Exercise 1 - Triangles 
 Porting Darcey & Conder's text<sup>[1]</sup> old demo from Java to Kotlin. \

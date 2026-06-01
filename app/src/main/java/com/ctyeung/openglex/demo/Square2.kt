@@ -1,6 +1,7 @@
 package com.ctyeung.openglex.demo
 
 import android.opengl.GLES20
+import android.opengl.GLES20.GL_UNSIGNED_SHORT
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -33,8 +34,6 @@ class Square2 {
         -0.5f, -0.5f, 0.0f,      // bottom left
         0.5f, -0.5f, 0.0f,      // bottom right
         0.5f,  0.5f, 0.0f,       // top right
-        -0.5f,  0.5f, 0.0f,      // bottom left
-        0.5f, -0.5f, 0.0f      // bottom right
     )
 
     val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
@@ -129,8 +128,8 @@ class Square2 {
                 GLES20.glUniform4fv(colorHandle, 1, color, 0)
             }
 
-            // Draw the triangle
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLES, 0, 6)
+            // Draw the triangles
+            GLES20.glDrawElements(GLES20.GL_TRIANGLES, drawOrder.size, GL_UNSIGNED_SHORT, drawListBuffer)
 
             // Disable vertex array
             GLES20.glDisableVertexAttribArray(it)

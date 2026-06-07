@@ -25,7 +25,11 @@ Rendering faces (triangles) wireframes ok.
 ## Exercise 3 - Loader (STL) Work in progress
 
 ## Exercise 4 - OpenGL Rendering
-Implement GPU shader, viewport, camera, etc
+Implemented GPU shader. \
+Next, left-hand-rule to determine visible. \
+Next, shading: dot-product between triangle-normal and light source. \ 
+<img width="250" alt="Screenshot 2026-06-07 at 5 18 29 PM" src="https://github.com/user-attachments/assets/d61e7978-07d0-460d-9bc2-6bc8ad5ccf2b" />
+
 
 # Android Studio
 <img width="520" height="269" alt="Screenshot 2026-04-27 at 6 48 16 PM" src="https://github.com/user-attachments/assets/df4e2500-4b58-4270-ab20-810599024387" />

@@ -32,7 +32,7 @@ class OffShape(val faces: ShortArray,
                 "}"
 
     val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
-    var rotateX = 0
+    var rotateX = 90
     val center = meshBound.getCenter()
 
     val xScale =  1 / (meshBound.maxX - meshBound.minX)

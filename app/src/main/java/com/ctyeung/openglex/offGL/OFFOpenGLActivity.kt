@@ -27,7 +27,7 @@ class OFFOpenGLActivity : Activity() {
      */
     fun LoadOFF() {
         // load file
-        val filePath = "space_shuttle.off"
+        val filePath = "Apple.off"
         val dataAscii = readAsciiFile(filePath)
 
         OffDecoder().let { off->

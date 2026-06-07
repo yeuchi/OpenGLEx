@@ -27,7 +27,7 @@ Rendering faces (triangles) wireframes ok.
 ## Exercise 4 - OpenGL Rendering
 Implemented GPU shader. \
 Next, left-hand-rule to determine visible. \
-Next, shading: dot-product between triangle-normal and light source. \ 
+Next, shading: dot-product between triangle-normal and light source.  
 
 <img width="250" alt="Screenshot 2026-06-07 at 5 18 29 PM" src="https://github.com/user-attachments/assets/d61e7978-07d0-460d-9bc2-6bc8ad5ccf2b" />
 

@@ -39,21 +39,21 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn_base"
         android:layout_margin="10dp"
-        android:text="Base"/>
+        android:text="OpenGL Triangle"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_basic"
         android:layout_margin="10dp"
-        android:text="Basic"/>
+        android:text="Animate Triangle"/>
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_demo"
             android:layout_margin="10dp"
-            android:text="Demo"/>
+            android:text="OpenGL Square"/>
 
     <Button
         android:layout_width="match_parent"

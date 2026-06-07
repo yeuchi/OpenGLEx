@@ -159,9 +159,9 @@ class OffDecoder {
                 var list = it.split(" ")
                 pos++
 
-                val face = arrayListOf<Int>()
+                val face = arrayListOf<Short>()
                 for(j in 0 until list.size) {
-                    face.add(list[j].toInt())
+                    face.add(list[j].toShort())
                 }
                 listFaces.add(OffFace(face))
             }
@@ -170,4 +170,4 @@ class OffDecoder {
     }
 }
 
-data class OffFace(val list: ArrayList<Int>)
+data class OffFace(val list: ArrayList<Short>)

@@ -22,7 +22,6 @@ Decoder, Rendering faces (triangles) wireframes ok.
 <img width="450" alt="Screenshot 2026-05-03 at 3 15 17 PM" src="https://github.com/user-attachments/assets/635b655d-7cf0-4652-82ad-d582df1b7391" />
 
 ## Exercise 3 - OpenGL Rendering
-Implemented GPU shader. \
 Next, left-hand-rule to determine visible. \
 Next, shading: dot-product between triangle-normal and light source.  
 

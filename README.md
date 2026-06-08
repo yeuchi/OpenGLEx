@@ -22,8 +22,8 @@ Decoder, Rendering faces (triangles) wireframes ok.
 <img width="450" alt="Screenshot 2026-05-03 at 3 15 17 PM" src="https://github.com/user-attachments/assets/635b655d-7cf0-4652-82ad-d582df1b7391" />
 
 ## Exercise 3 - OpenGL Rendering
-Next, left-hand-rule to determine visible. \
-Next, shading: dot-product between triangle-normal and light source.  
+Next, implement vertex shader for rotation, left-hand-rule to determine visible. \
+Next, implement fragment shader for shading: dot-product between triangle-normal and light source.  
 
 <img width="250" alt="Screenshot 2026-06-07 at 5 18 29 PM" src="https://github.com/user-attachments/assets/d61e7978-07d0-460d-9bc2-6bc8ad5ccf2b" />
 

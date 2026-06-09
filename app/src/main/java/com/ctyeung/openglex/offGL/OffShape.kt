@@ -43,6 +43,9 @@ class OffShape(val faces: ShortArray,
      * initialize vertex byte buffer for shape coordinates
      */
     private fun getVertexBuffer(): FloatBuffer {
+        /*
+         * TODO migrate all this stuff into vertex and fragment shaders
+         */
         val TRIANGLE_THREE_POINTS = 3
         rotateX += 2
         if(rotateX>360) {

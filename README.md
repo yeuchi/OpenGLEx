@@ -42,3 +42,6 @@ Next, implement fragment shader for Gouraud or phong shading.
 1. Android Wireless Application Develop by Lauren Darcey and Shae Conder, 2nd Edition - Pearson Education \
 ISBN-13: 978-0-321-74967-3 \
 ISBN-10: 0-321-74967-7
+
+2. ModelViewer3d by Dmitry Brant, GitHub 
+https://github.com/dbrant/ModelViewer3D

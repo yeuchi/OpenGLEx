@@ -22,8 +22,8 @@ Decoder, Rendering faces (triangles) wireframes ok.
 <img width="450" alt="Screenshot 2026-05-03 at 3 15 17 PM" src="https://github.com/user-attachments/assets/635b655d-7cf0-4652-82ad-d582df1b7391" />
 
 ## Exercise 3 - OpenGL Rendering
-Next, implement vertex shader for rotation, left-hand-rule to determine visible. \
-Next, implement fragment shader for shading: dot-product between triangle-normal and light source.  
+Next, implement vertex shader for rotation, cross product(normal) to determine visible. \
+Next, implement fragment shader for Gouraud or phong shading.
 
 <img width="250" alt="Screenshot 2026-06-07 at 5 18 29 PM" src="https://github.com/user-attachments/assets/d61e7978-07d0-460d-9bc2-6bc8ad5ccf2b" />
 
@@ -42,3 +42,9 @@ Next, implement fragment shader for shading: dot-product between triangle-normal
 1. Android Wireless Application Develop by Lauren Darcey and Shae Conder, 2nd Edition - Pearson Education \
 ISBN-13: 978-0-321-74967-3 \
 ISBN-10: 0-321-74967-7
+
+2. ModelViewer3d by Dmitry Brant, GitHub 
+https://github.com/dbrant/ModelViewer3D
+
+3. Shader Basics - Vertex Shader
+https://shader-tutorial.dev/basics/vertex-shader/

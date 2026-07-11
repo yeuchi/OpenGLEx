@@ -45,3 +45,6 @@ ISBN-10: 0-321-74967-7
 
 2. ModelViewer3d by Dmitry Brant, GitHub 
 https://github.com/dbrant/ModelViewer3D
+
+3. Shader Basics - Vertex Shader
+https://shader-tutorial.dev/basics/vertex-shader/

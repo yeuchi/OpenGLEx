@@ -18,11 +18,27 @@ class OffShape(val faces: ShortArray,
                val verticies: ArrayList<PointF3D>,
                val meshBound: MeshBound) {
 
-    private val vertexShaderCode =
-        "attribute vec4 vPosition;" +
-                "void main() {" +
-                "  gl_Position = vPosition;" +
-                "}"
+    private val vertexShaderCode = """
+        attribute vec4 vPosition;
+        uniform float radX;
+        uniform float radY;
+
+        const float PI = 3.1415926535897932384626433832795;
+
+        mat4 rotate(float radX, float radY) {
+          mat4 rotationMatrix;
+          rotationMatrix[0] = vec4(cos(radY), 0, sin(radY), 0);
+          rotationMatrix[1] = vec4(0, cos(radX), -sin(radX), 0);
+          rotationMatrix[2] = vec4(0, sin(radX), cos(radX), 0);
+          rotationMatrix[3] = vec4(0, 0, 0, 1);
+          return rotationMatrix;
+        }
+
+        void main() {
+          mat4 rotatedModelMatrix = rotate(radX, radY);
+          gl_Position = rotatedModelMatrix * vPosition;
+        }
+    """.trimIndent()
 
     private val fragmentShaderCode =
         "precision mediump float;" +
@@ -47,15 +63,6 @@ class OffShape(val faces: ShortArray,
          * TODO migrate all this stuff into vertex and fragment shaders
          */
         val TRIANGLE_THREE_POINTS = 3
-        rotateX += 2
-        if(rotateX>360) {
-            rotateX -= 360
-        }
-
-        val radX = Math.PI / 180.0 * rotateX
-        val radY = Math.PI / 180.0 * 0
-        val radZ = Math.PI / 180.0 * 0
-
         var index = 0
         var coords = FloatArray(verticies.size * TRIANGLE_THREE_POINTS)
         verticies.forEach { vertex ->
@@ -63,15 +70,9 @@ class OffShape(val faces: ShortArray,
             val vY = (vertex.y - center.y) * yScale
             val vZ = (vertex.z - center.z) * zScale
 
-            val y = cos(radX) * vY - sin(radX) * vZ
-            val z = sin(radX) * vY + cos(radX) * vZ
-
-            val x = cos(radY) * vX + sin(radY) * z
-            //val zz = -sin(radY) * vX + cos(radY) * z
-
-            coords[index++] = x.toFloat()
-            coords[index++] = y.toFloat()
-            coords[index++] = z.toFloat()
+            coords[index++] = vX
+            coords[index++] = vY
+            coords[index++] = vZ
         }
 
         // (# of coordinate values * 4 bytes per float)
@@ -129,16 +130,32 @@ class OffShape(val faces: ShortArray,
     }
 
     private val vertexStride: Int = com.ctyeung.openglex.demo.COORDS_PER_VERTEX * 4 // 4 bytes per vertex
-
-    private var positionHandle: Int = 0
-    private var mColorHandle: Int = 0
+    private val radianY = (Math.PI / 180.0 * 0).toFloat()
 
     fun draw() {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
 
+        // get handle to fragment shader's vColor member
+        GLES20.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
+
+            // Set color for drawing the triangle
+            GLES20.glUniform4fv(colorHandle, 1, color, 0)
+        }
+
+        rotateX += 2
+        if(rotateX>360) {
+            rotateX -= 360
+        }
+        GLES20.glGetUniformLocation(mProgram, "radX").also { radX ->
+            GLES20.glUniform1f(radX, (Math.PI / 180.0 * rotateX).toFloat())
+        }
+        GLES20.glGetUniformLocation(mProgram, "radY").also { radX ->
+            GLES20.glUniform1f(radX, radianY)
+        }
+
         // get handle to vertex shader's vPosition member
-        positionHandle = GLES20.glGetAttribLocation(mProgram, "vPosition").also {
+        GLES20.glGetAttribLocation(mProgram, "vPosition").also {
 
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
@@ -152,13 +169,6 @@ class OffShape(val faces: ShortArray,
                 vertexStride,
                 getVertexBuffer()
             )
-
-            // get handle to fragment shader's vColor member
-            mColorHandle = GLES20.glGetUniformLocation(mProgram, "vColor").also { colorHandle ->
-
-                // Set color for drawing the triangle
-                GLES20.glUniform4fv(colorHandle, 1, color, 0)
-            }
 
             // Draw the triangles
             GLES20.glDrawElements(GLES20.GL_TRIANGLES, faces.size, GL_UNSIGNED_SHORT, drawListBuffer)

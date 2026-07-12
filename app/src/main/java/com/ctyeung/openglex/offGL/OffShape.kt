@@ -132,6 +132,11 @@ class OffShape(val faces: ShortArray,
     private val vertexStride: Int = com.ctyeung.openglex.demo.COORDS_PER_VERTEX * 4 // 4 bytes per vertex
     private val radianY = (Math.PI / 180.0 * 0).toFloat()
 
+    /**
+     * Draw
+     *  1. pass arguments to shaders
+     *  2. draw elements
+     */
     fun draw() {
         // Add program to OpenGL ES environment
         GLES20.glUseProgram(mProgram)
@@ -155,7 +160,7 @@ class OffShape(val faces: ShortArray,
         }
 
         // get handle to vertex shader's vPosition member
-        GLES20.glGetAttribLocation(mProgram, "vPosition").also {
+        val vPositions = GLES20.glGetAttribLocation(mProgram, "vPosition").also {
 
             // Enable a handle to the triangle vertices
             GLES20.glEnableVertexAttribArray(it)
@@ -169,12 +174,12 @@ class OffShape(val faces: ShortArray,
                 vertexStride,
                 getVertexBuffer()
             )
-
-            // Draw the triangles
-            GLES20.glDrawElements(GLES20.GL_TRIANGLES, faces.size, GL_UNSIGNED_SHORT, drawListBuffer)
-
-            // Disable vertex array
-            GLES20.glDisableVertexAttribArray(it)
         }
+
+        // Draw the triangles
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, faces.size, GL_UNSIGNED_SHORT, drawListBuffer)
+
+        // Disable vertex array
+        GLES20.glDisableVertexAttribArray(vPositions)
     }
 }

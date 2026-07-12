@@ -11,9 +11,11 @@ import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.lang.Exception
+import kotlin.collections.arrayListOf
+import kotlin.math.sqrt
 
 class OffDecoder {
-    protected var pos:Int = 0;
+    protected var pos: Int = 0;
     private var _numVertices: Int = 0
     val numVertices: Int
         get() {
@@ -36,6 +38,8 @@ class OffDecoder {
     var meshBound = MeshBound()
     var listVertices = arrayListOf<PointF3D>()
 
+    // face normal for each vertex (3 identical value -> Gourad shading)
+    var listNormals = arrayListOf<PointF3D>()
 
     var listFaces = ArrayList<OffFace>()
 
@@ -53,10 +57,10 @@ class OffDecoder {
             preloadInit()
             val lines = ascii.split('\n')
 
-            if(parseOFFHeader(lines)) {
-                if(parseCount(lines)) {
+            if (parseOFFHeader(lines)) {
+                if (parseCount(lines)) {
                     if (parseVertices(lines)) {
-                        return parseFaces(lines)
+                        return parseFaces(lines);
                     }
                 }
             }
@@ -78,8 +82,8 @@ class OffDecoder {
     }
 
     private fun skipComment(lines: List<String>) {
-        while(isComment(lines[pos])){
-            pos ++
+        while (isComment(lines[pos])) {
+            pos++
         }
     }
 
@@ -124,18 +128,19 @@ class OffDecoder {
         listVertices.apply {
             clear()
 
-            if((numVertices+pos) > lines.size) {
+            if ((numVertices + pos) > lines.size) {
                 // invalid - not enough lines
                 return false
             }
 
-            for(i in 0 until numVertices){
+            for (i in 0 until numVertices) {
                 lines[pos].replace("\r", "").let {
                     val list = it.split(' ')
-                    pos ++
+                    pos++
 
-                    if(list.size >= 3) {
-                        val vertex = PointF3D(list[0].toFloat(), list[1].toFloat(), list[2].toFloat())
+                    if (list.size >= 3) {
+                        val vertex =
+                            PointF3D(list[0].toFloat(), list[1].toFloat(), list[2].toFloat())
                         listVertices.add(vertex)
                         meshBound.collect(vertex.x, vertex.y, vertex.z)
                     }
@@ -146,28 +151,81 @@ class OffDecoder {
     }
 
     /*
-     * One line for each polygonal face:
+     * One triangle for each face:
      * n v1 v2 ... vn r g b a,
      * the number of vertices, and the vertex indices for each face.
      */
     private fun parseFaces(lines: List<String>): Boolean {
         skipComment(lines)
-
         listFaces.clear()
-        for(i in 0 until numFaces) {
+        /*
+         * TODO list size must == 3
+         */
+        for (i in 0 until numFaces) {
             lines[pos].replace("\r", "").let {
-                var list = it.split(" ")
-                pos++
+                it.split(" ").let { list ->
+                    pos++
 
-                val face = arrayListOf<Short>()
-                for(j in 0 until list.size) {
-                    face.add(list[j].toShort())
+                    val face = arrayListOf<Short>()
+
+                    /*
+                     * TODO list size must be 4 [count, index1, index2, index3]
+                     */
+                    for (j in list.indices) {
+                        face.add(list[j].toShort())
+                    }
+                    val normalVector = parseNormals(face)
+                    listFaces.add(OffFace(face, normalVector))
                 }
-                listFaces.add(OffFace(face))
             }
         }
         return true
     }
+
+    private fun parseNormals(face: ArrayList<Short>): PointF3D {
+
+        // get vertices
+        val a = listVertices[face[1].toInt()]
+        val b = listVertices[face[2].toInt()]
+        val c = listVertices[face[3].toInt()]
+
+        // calculate edge vector
+        val e1x = b.x - a.x
+        val e1y = b.y - a.y
+        val e1z = b.z - a.z
+
+        val e2x = c.x - a.x
+        val e2y = c.y - a.y
+        val e2z = c.z - a.z
+
+        // calculate cross product
+        val nx = (e1y * e2z) - (e1z * e2y)
+        val ny = (e1z * e2x) - (e1x * e2z)
+        val nz = (e1x * e2y) - (e1y * e2x)
+
+        // normalize vector
+        val len = sqrt(nx * nx + ny * ny + nz * nz)
+        val normalX = if (len > 0) {
+            nx / len
+        } else {
+            nx
+        }
+        val normalY = if (len > 0) {
+            ny / len
+        } else {
+            ny
+        }
+        val normalZ = if (len > 0) {
+            nz / len
+        } else {
+            nz
+        }
+
+        return PointF3D(normalX, normalY, normalZ)
+    }
 }
 
-data class OffFace(val list: ArrayList<Short>)
+/**
+ * A Face - triangle - list of 3 indexes
+ */
+data class OffFace(val list: ArrayList<Short>, val normalVector: PointF3D)

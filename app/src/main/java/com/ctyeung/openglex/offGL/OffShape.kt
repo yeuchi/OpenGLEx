@@ -15,6 +15,7 @@ import kotlin.math.sin
  * TODO need to scale
  */
 class OffShape(val faces: ShortArray,
+               val normals: ShortArray,
                val verticies: ArrayList<PointF3D>,
                val meshBound: MeshBound) {
 

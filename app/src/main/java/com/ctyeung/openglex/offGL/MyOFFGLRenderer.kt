@@ -23,6 +23,7 @@ class MyOFFGLRenderer(val off: OffDecoder) : GLSurfaceView.Renderer {
 
         // initialize a triangle
         offShape = OffShape(faces = getDrawOrders(off.listFaces),
+            normals = getNormals(off.listFaces),
             verticies = off.listVertices,
             meshBound = off.meshBound)
     }
@@ -47,7 +48,7 @@ class MyOFFGLRenderer(val off: OffDecoder) : GLSurfaceView.Renderer {
         val xScale =  1 / (meshBound.maxX - meshBound.minX)
         val yScale =  1 / (meshBound.maxY - meshBound.minY)
         val zScale =  1 / (meshBound.maxZ - meshBound.minZ)
-        var squareCoords = FloatArray(verticies.size * TRIANGLE_THREE_POINTS)
+        val squareCoords = FloatArray(verticies.size * TRIANGLE_THREE_POINTS)
         verticies.forEach { vertex ->
 
             squareCoords[index++] = (vertex.x - center.x) * xScale
@@ -56,16 +57,28 @@ class MyOFFGLRenderer(val off: OffDecoder) : GLSurfaceView.Renderer {
         }
         return squareCoords
     }
+    val TRIANGLE_THREE_POINTS = 3
 
     protected fun getDrawOrders(faces:ArrayList<OffFace>): ShortArray {
-        val TRIANGLE_THREE_POINTS = 3
         var index = 0
         var drawOrder = ShortArray(faces.size * TRIANGLE_THREE_POINTS)
         faces.forEach {face ->
-            drawOrder[index++] = face.list[0]
+            // index 0 is count
             drawOrder[index++] = face.list[1]
             drawOrder[index++] = face.list[2]
+            drawOrder[index++] = face.list[3]
         }
         return drawOrder
+    }
+
+    protected fun getNormals(faces:ArrayList<OffFace>): ShortArray {
+        var index = 0
+        var normals = ShortArray(faces.size * TRIANGLE_THREE_POINTS)
+        faces.forEach {face ->
+            normals[index++] = face.list[0]
+            normals[index++] = face.list[1]
+            normals[index++] = face.list[2]
+        }
+        return normals
     }
 }

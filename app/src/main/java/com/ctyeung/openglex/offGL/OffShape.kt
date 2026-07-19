@@ -26,6 +26,7 @@ class OffShape(val faces: ShortArray,
         uniform float radY;
         attribute vec3 a_Normal;
         varying vec3 v_Normal;
+        varying vec3 v_Position;
 
         mat4 rotate(float radX, float radY) {
           mat4 rotationMatrix;
@@ -38,16 +39,24 @@ class OffShape(val faces: ShortArray,
 
         void main() {
           mat4 rotatedModelMatrix = rotate(radX, radY);
+          v_Normal = normalize(vec3(rotatedModelMatrix * vec4(a_Normal, 0.0)));
           gl_Position = rotatedModelMatrix * vPosition;
+          v_Position = gl_Position.xyz / gl_Position.w;
         }
     """.trimIndent()
 
     private val fragmentShaderCode =
-        "precision mediump float;" +
-                "uniform vec4 vColor;" +
-                "void main() {" +
-                "  gl_FragColor = vColor;" +
-                "}"
+        """
+            vec3 u_LightDir = vec3(1.0, 0.0, 0.0);
+            vec4 v_Color = vec4(0.5, 0.5, 0.5, 0.5);
+            varying vec3 v_Normal;
+            varying vec3 v_Position;
+            
+            void main() {
+                float reflectance = max(dot(u_LightDir, v_Normal), 0.0);
+                gl_FragColor = v_Color + reflectance;
+            }
+        """.trimIndent()
 
     val color = floatArrayOf(0.63671875f, 0.76953125f, 0.22265625f, 1.0f)
     var rotateX = 90

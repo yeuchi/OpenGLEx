@@ -2,6 +2,7 @@ package com.ctyeung.openglex.offGL
 
 import android.opengl.GLES20
 import android.opengl.GLES20.GL_UNSIGNED_SHORT
+import com.ctyeung.openglex.demo.COORDS_PER_VERTEX
 import com.ctyeung.openglex.geometry.PointF3D
 import com.ctyeung.openglex.off.MeshBound
 import java.nio.ByteBuffer
@@ -23,8 +24,8 @@ class OffShape(val faces: ShortArray,
         attribute vec4 vPosition;
         uniform float radX;
         uniform float radY;
-
-        const float PI = 3.1415926535897932384626433832795;
+        attribute vec3 a_Normal;
+        varying vec3 v_Normal;
 
         mat4 rotate(float radX, float radY) {
           mat4 rotationMatrix;
@@ -86,6 +87,15 @@ class OffShape(val faces: ShortArray,
         }
         return buffer
     }
+
+    private fun getNormalBuffer(): ShortBuffer =
+        ByteBuffer.allocateDirect(normals.size * 2).run {
+            order(ByteOrder.nativeOrder())
+            asShortBuffer().apply {
+                put(normals)
+                position(0)
+            }
+        }
 
     // initialize byte buffer for the draw list
     private val drawListBuffer: ShortBuffer =
@@ -158,6 +168,12 @@ class OffShape(val faces: ShortArray,
         }
         GLES20.glGetUniformLocation(mProgram, "radY").also { radX ->
             GLES20.glUniform1f(radX, radianY)
+        }
+
+        GLES20.glGetAttribLocation(mProgram, "v_Normal").also {
+            GLES20.glEnableVertexAttribArray(it)
+            GLES20.glVertexAttribPointer(it, COORDS_PER_VERTEX, GLES20.GL_FLOAT, false,
+                vertexStride, getNormalBuffer())
         }
 
         // get handle to vertex shader's vPosition member

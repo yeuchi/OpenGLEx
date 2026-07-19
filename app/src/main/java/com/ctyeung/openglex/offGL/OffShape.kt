@@ -30,7 +30,7 @@ class OffShape(val faces: ShortArray,
 
         mat4 rotate(float radX, float radY) {
           mat4 rotationMatrix;
-          rotationMatrix[0] = vec4(cos(radY), 0, sin(radY), 0);
+          rotationMatrix[0] = vec4(1, 0, 0, 0);
           rotationMatrix[1] = vec4(0, cos(radX), -sin(radX), 0);
           rotationMatrix[2] = vec4(0, sin(radX), cos(radX), 0);
           rotationMatrix[3] = vec4(0, 0, 0, 1);

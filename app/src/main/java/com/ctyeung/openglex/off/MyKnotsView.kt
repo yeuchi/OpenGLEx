@@ -94,7 +94,8 @@ class MyKnotsView(
                 val y = cos(radX) * vtx1.y - sin(radX) * vtx1.z
                 val z = sin(radX) * vtx1.y + cos(radX) * vtx1.z
 
-                val x = cos(radY) * vtx1.x + sin(radY) * z
+                //val x = cos(radY) * vtx1.x + sin(radY) * z
+                val x = vtx1.x
                 //val zz = -sin(radY) * vtx1.x + cos(radY) * z
 
                 if(j==0){
